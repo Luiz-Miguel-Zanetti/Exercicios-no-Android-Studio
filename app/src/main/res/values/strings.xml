@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Primeiro Projeto</string>
+    <string name="texto_aplicativo">Bem vindo ao meu aplicativo</string>
+    <string name="texto_email">Digite seu email:</string>
+    <string name="texto_senha">Digite sua senha:</string>
+    <string name="texto_botão">Logar</string>
+</resources>
