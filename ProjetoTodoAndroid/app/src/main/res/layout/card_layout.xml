@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/textNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Tarefa " />
+        <TextView
+            android:id="@+id/textDescrição"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Descrição "
+            android:paddingTop="8dp"/>
+        <TextView
+            android:id="@+id/textResponsavel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Responsavel"
+            android:paddingTop="8dp"/>
+        <TextView
+            android:id="@+id/textData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingTop="8dp"
+            tools:text="Data " />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="8dp"
+            android:text="Status"
+            android:textColor="#8A7F7F"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingLeft="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Categoria" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:text="DELETAR TAREFA"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
