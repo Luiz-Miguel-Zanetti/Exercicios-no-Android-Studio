@@ -20,24 +20,31 @@ class ListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
+
         binding = FragmentListBinding.inflate(layoutInflater, container, false)
 
+        val adapter = NomeAdapter()
+        binding.recyclerTarefa.adapter = adapter
+        binding.recyclerTarefa.layoutManager = LinearLayoutManager(context)
+        binding.recyclerTarefa.setHasFixedSize(true)
 
 
-        binding.floatingAdd.setOnClickListener {
 
-            findNavController().navigate(R.id.action_listFragment2_to_formFragment2)
+        binding.fabAdd.setOnClickListener {
 
-            val adapter = NomeAdapter()
-
-            binding.recyclerTarefa.adapter = adapter
-            binding.recyclerTarefa.layoutManager = LinearLayoutManager(context)
-            binding.recyclerTarefa.setHasFixedSize(true)
+            findNavController().navigate(R.id.action_listFragment_to_formFragment)
 
         }
 
+
+
         return binding.root
+
+
+
     }
+
+
 
 
 }
