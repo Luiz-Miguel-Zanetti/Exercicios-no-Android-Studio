@@ -40,7 +40,7 @@ class NomeAdapter : RecyclerView.Adapter<NomeAdapter.NomeMyViewHolder>() {
         holder.responsavel.text = item.responsavel
         holder.descrição.text = item.descrição
         holder.data.text = item.data
-        holder.categoria.text = item.categoria
+        holder.categoria.text = item.categoria.descrição
 
 
 

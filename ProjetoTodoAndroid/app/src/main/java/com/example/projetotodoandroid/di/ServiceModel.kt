@@ -1,6 +1,6 @@
 package com.example.projetotodoandroid.di
 
-import com.example.projetotodoandroid.model.Repository
+import com.example.projetotodoandroid.api.Repository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +13,7 @@ object ServiceModel {
 
     @Singleton
     @Provides
-    fun returnRepository(): Repository{
+    fun returnRepository(): Repository {
 
         return Repository()
 
