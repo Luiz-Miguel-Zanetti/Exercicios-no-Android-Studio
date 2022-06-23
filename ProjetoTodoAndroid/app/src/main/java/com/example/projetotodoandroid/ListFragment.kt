@@ -10,12 +10,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projetotodoandroid.adapter.NomeAdapter
+import com.example.projetotodoandroid.adapter.TaskClickListener
 import com.example.projetotodoandroid.databinding.FragmentListBinding
 import com.example.projetotodoandroid.model.Tarefa
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), TaskClickListener {
 
     private lateinit var binding: FragmentListBinding
     private val mainViewModel : MainViewModel by activityViewModels()
@@ -28,7 +29,7 @@ class ListFragment : Fragment() {
         mainViewModel.listTarefa()
 
 
-        val adapter = NomeAdapter()
+        val adapter = NomeAdapter(this, mainViewModel)
         binding.recyclerTarefa.adapter = adapter
         binding.recyclerTarefa.layoutManager = LinearLayoutManager(context)
         binding.recyclerTarefa.setHasFixedSize(true)
@@ -37,6 +38,7 @@ class ListFragment : Fragment() {
 
         binding.fabAdd.setOnClickListener {
 
+            mainViewModel.tarefaSelecionda = null
             findNavController().navigate(R.id.action_listFragment_to_formFragment)
 
         }
@@ -61,7 +63,10 @@ class ListFragment : Fragment() {
 
     }
 
-
+    override fun onTaskClickListenter(tarefa: Tarefa) {
+        mainViewModel.tarefaSelecionda = tarefa
+        findNavController().navigate(R.id.action_listFragment_to_formFragment)
+    }
 
 
 }

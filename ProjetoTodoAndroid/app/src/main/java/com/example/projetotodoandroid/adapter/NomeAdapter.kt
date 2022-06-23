@@ -5,42 +5,55 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.projetotodoandroid.MainViewModel
 import com.example.projetotodoandroid.R
+import com.example.projetotodoandroid.databinding.CardLayoutBinding
+import com.example.projetotodoandroid.databinding.FragmentListBinding
 import com.example.projetotodoandroid.model.Tarefa
 
-class NomeAdapter : RecyclerView.Adapter<NomeAdapter.NomeMyViewHolder>() {
+class NomeAdapter (
+
+
+    val taskClickListener: TaskClickListener,
+    val mainViewModel: MainViewModel): RecyclerView.Adapter<NomeAdapter.NomeMyViewHolder>() {
 
     var listaTarefas = emptyList<Tarefa>()
 
-    class NomeMyViewHolder(view : View) : RecyclerView.ViewHolder(view){
+    class NomeMyViewHolder(val binding: CardLayoutBinding) : RecyclerView.ViewHolder(binding.root){
 
-        val nomeTarefa = view.findViewById<TextView>(R.id.textNome)
-        val responsavel = view.findViewById<TextView>(R.id.textResponsavel)
-        val descrição = view.findViewById<TextView>(R.id.textDescrição)
-        val data = view.findViewById<TextView>(R.id.textData)
-        val categoria = view.findViewById<TextView>(R.id.textCategoria)
-        val switch = view.findViewById<TextView>(R.id.switch1)
 
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NomeMyViewHolder {
 
-       val layout = LayoutInflater.from(parent.context).inflate(R.layout.card_layout, parent, false)
 
-        return NomeMyViewHolder(layout)
+        return NomeMyViewHolder(CardLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     }
 
     override fun onBindViewHolder(holder: NomeMyViewHolder, position: Int) {
 
-        val item = listaTarefas[position]
+        val tarefa = listaTarefas[position]
 
-        holder.nomeTarefa.text = item.nome
-        holder.responsavel.text = item.responsavel
-        holder.descrição.text = item.descrição
-        holder.data.text = item.data
-        holder.categoria.text = item.categoria.descrição
+        holder.binding.textNome.text = tarefa.nome
+        holder.binding.textResponsavel.text = tarefa.responsavel
+        holder.binding.textDescricao.text = tarefa.descrição
+        holder.binding.textData.text = tarefa.data
+        holder.binding.textCategoria.text = tarefa.categoria.descricao
+        holder.binding.switch1.isChecked = tarefa.status
+        holder.itemView.setOnClickListener{
+
+            taskClickListener.onTaskClickListenter(tarefa)
+
+        }
+
+        holder.binding.switch1.setOnCheckedChangeListener { buttonView, ativo ->
+
+               tarefa.status = ativo
+            mainViewModel.updateTarefa(tarefa)
+
+        }
 
 
 
@@ -57,7 +70,7 @@ class NomeAdapter : RecyclerView.Adapter<NomeAdapter.NomeMyViewHolder>() {
 
     fun setLista(list: List<Tarefa>){
 
-        listaTarefas = list
+        listaTarefas = list.sortedByDescending { it.id }
          notifyDataSetChanged()
     }
 

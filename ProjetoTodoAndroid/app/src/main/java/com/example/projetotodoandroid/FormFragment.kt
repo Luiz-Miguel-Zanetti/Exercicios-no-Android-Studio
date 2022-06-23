@@ -25,6 +25,7 @@ class FormFragment : Fragment(), TimePickerListener {
     private lateinit var binding : FragmentFormBinding
     private  val mainViewModel : MainViewModel by activityViewModels()
     private  var categoriaSelecionada = 0L
+    private var tarefaSelecionada : Tarefa? = null
 
 
 
@@ -34,6 +35,8 @@ class FormFragment : Fragment(), TimePickerListener {
     ): View? {
 
       binding = FragmentFormBinding.inflate(layoutInflater, container, false)
+
+        carregarDados()
 
         binding.editData.setOnClickListener {
 
@@ -119,9 +122,25 @@ class FormFragment : Fragment(), TimePickerListener {
 
         if (validarCampos(nome, descriçãoTarefa, responsavel)){
 
-            val tarefa = Tarefa(0,nome, descriçãoTarefa, responsavel, data, status, categoria)
-            mainViewModel.addTarefa(tarefa)
-            Toast.makeText(context, "Tarefa cadastrada com sucesso", Toast.LENGTH_LONG).show()
+            val salvar : String
+
+            if ( tarefaSelecionada != null ){
+
+                salvar = "Tarefa Atualizada"
+
+                val tarefa = Tarefa(tarefaSelecionada?.id!!,nome, descriçãoTarefa, responsavel, data, status, categoria)
+                mainViewModel.addTarefa(tarefa)
+
+
+            }else{
+
+                salvar = "Tarefa Criada"
+                val tarefa = Tarefa(0,nome, descriçãoTarefa, responsavel, data, status, categoria)
+                mainViewModel.addTarefa(tarefa)
+
+
+            }
+            Toast.makeText(context, salvar, Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_formFragment_to_listFragment)
 
 
@@ -135,6 +154,20 @@ class FormFragment : Fragment(), TimePickerListener {
 
     }
 
+    private fun carregarDados(){
+
+        tarefaSelecionada = mainViewModel.tarefaSelecionda
+        if(tarefaSelecionada != null){
+
+            binding.editNome.setText((tarefaSelecionada?.nome))
+            binding.editDescricao.setText((tarefaSelecionada?.descrição))
+            binding.editResponsavel.setText((tarefaSelecionada?.responsavel))
+            binding.editData.setText((tarefaSelecionada?.data))
+            binding.switchAtivoCard.isChecked = tarefaSelecionada?.status!!
+
+        }
+
+    }
 
 
 
