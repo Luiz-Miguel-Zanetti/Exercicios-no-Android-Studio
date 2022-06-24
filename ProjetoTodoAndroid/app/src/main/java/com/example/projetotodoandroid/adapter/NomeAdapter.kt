@@ -1,5 +1,7 @@
 package com.example.projetotodoandroid.adapter
 
+import android.app.AlertDialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +17,11 @@ class NomeAdapter (
 
 
     val taskClickListener: TaskClickListener,
-    val mainViewModel: MainViewModel): RecyclerView.Adapter<NomeAdapter.NomeMyViewHolder>() {
+    val mainViewModel: MainViewModel,
+    val context : Context
+
+    ): RecyclerView.Adapter<NomeAdapter.NomeMyViewHolder>() {
+
 
     var listaTarefas = emptyList<Tarefa>()
 
@@ -55,7 +61,12 @@ class NomeAdapter (
 
         }
 
+         holder.binding.buttonDeletar.setOnClickListener {
 
+             mainViewModel.deleteTarefa(tarefa.id)
+             showAlertDialog(tarefa.id)
+
+         }
 
 
 
@@ -72,6 +83,16 @@ class NomeAdapter (
 
         listaTarefas = list.sortedByDescending { it.id }
          notifyDataSetChanged()
+    }
+
+    private fun showAlertDialog(id: Long){
+
+        AlertDialog.Builder(context).setTitle("Excluir tarefa").setMessage("Deseja excluir a tarefa").setPositiveButton("Sim"){
+            _,_ -> mainViewModel.deleteTarefa(id)
+
+
+        }.setNegativeButton("Não"){_,_ ->}.show()
+
     }
 
 }

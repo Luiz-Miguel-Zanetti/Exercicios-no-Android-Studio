@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.time.LocalDate
+import java.time.ZoneId
 import javax.inject.Inject
 
 @HiltViewModel
@@ -122,6 +123,25 @@ class MainViewModel @Inject constructor(
 
         }
 
+
+    }
+
+    fun deleteTarefa(id: Long){
+
+        viewModelScope.launch {
+
+            try {
+
+
+                repository.deleteTarefa(id)
+                listTarefa()
+
+            }catch (e : Exception){
+
+                Log.d("Erro", e.message.toString())
+
+            }
+        }
 
     }
 

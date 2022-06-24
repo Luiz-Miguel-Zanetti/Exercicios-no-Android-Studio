@@ -73,7 +73,7 @@
             tools:text="Categoria" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonDeletar"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
